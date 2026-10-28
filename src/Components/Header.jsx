@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <header className="recipe-header bg-success text-light p-3">
-      <h1 className="recipe-header-title fw-bold"> Recipe-Finder🥗</h1>
+      <h1 className="recipe-header-title fw-bold">Recipe Book 🥗</h1>
       <input
         className="recipe-search"
         type="search"
