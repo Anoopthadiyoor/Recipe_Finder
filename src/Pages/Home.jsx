@@ -8,7 +8,10 @@ import { deleteRecipe, fetchRecipe } from '../Redux/RecipeSlice'
 function Home() {
     const dispatch = useDispatch()
     const { Allrecipes, searchItem, loading, error } = useSelector(state => state.recipeReducer)
-    const filteredRecipes = Allrecipes.filter(recipe => recipe.cuisine.toLowerCase().includes(searchItem.trim().toLowerCase())
+    const searchTerm = searchItem.trim().toLowerCase()
+    const filteredRecipes = Allrecipes.filter(recipe =>
+        recipe.name?.toLowerCase().includes(searchTerm) ||
+        recipe.cuisine?.toLowerCase().includes(searchTerm)
     )
     
     useEffect(() => {
@@ -31,6 +34,9 @@ function Home() {
                                     <Card.Title>{recipe.name}</Card.Title>
                                     <Card.Text>{recipe.cuisine}</Card.Text>
                                     <div className="d-flex gap-2">
+                                        <Button as={Link} to={`/recipe/${recipe.id}`} variant="success" size="sm">
+                                            View details
+                                        </Button>
                                         <Button as={Link} to={`/edit/${recipe.id}`} variant="outline-success" size="sm">
                                             Edit
                                         </Button>

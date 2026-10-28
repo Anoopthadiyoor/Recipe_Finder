@@ -13,8 +13,8 @@ function Header() {
       <input
         className="recipe-search"
         type="search"
-        placeholder="Search recipes by cuisine..."
-        aria-label="Search recipes by cuisine"
+        placeholder="Search by recipe name or cuisine..."
+        aria-label="Search recipes by name or cuisine"
         onChange={(e) => dispatch(searchRecipes(e.target.value))}
       />
       <Button className="recipe-header-action" as={Link} to="/add" variant="light">
