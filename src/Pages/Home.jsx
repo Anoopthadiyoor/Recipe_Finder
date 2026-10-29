@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Card } from 'react-bootstrap'
@@ -7,6 +7,7 @@ import { deleteRecipe, fetchRecipe } from '../Redux/RecipeSlice'
 
 function Home() {
     const dispatch = useDispatch()
+    const [hoveredRecipeId, setHoveredRecipeId] = useState(null)
     const { Allrecipes, searchItem, loading, error } = useSelector(state => state.recipeReducer)
     const searchTerm = searchItem.trim().toLowerCase()
     const filteredRecipes = Allrecipes.filter(recipe =>
@@ -28,8 +29,29 @@ function Home() {
             { ( <div className="row g-4">
                     {filteredRecipes.map(recipe => (
                         <div className="col-12 col-sm-6 col-lg-4 col-xl-3" key={recipe.id}>
-                            <Card className="h-100">
-                                <Card.Img  variant="top" src={recipe.image} style={{ height: '200px', objectFit: 'cover' }}  />
+                            <Card
+                                className="h-100"
+                                onMouseEnter={() => setHoveredRecipeId(recipe.id)}
+                                onMouseLeave={() => setHoveredRecipeId(null)}
+                                style={{
+                                    overflow: 'hidden',
+                                    transform: hoveredRecipeId === recipe.id ? 'translateY(-6px)' : 'translateY(0)',
+                                    boxShadow: hoveredRecipeId === recipe.id
+                                        ? '0 0.9rem 1.8rem rgba(25, 135, 84, 0.42)'
+                                        : '0 0.125rem 0.25rem rgba(0, 0, 0, 0.08)',
+                                    transition: 'transform 180ms ease, box-shadow 180ms ease',
+                                }}
+                            >
+                                <Card.Img
+                                    variant="top"
+                                    src={recipe.image}
+                                    style={{
+                                        height: '200px',
+                                        objectFit: 'cover',
+                                        transform: hoveredRecipeId === recipe.id ? 'scale(1.05)' : 'scale(1)',
+                                        transition: 'transform 180ms ease',
+                                    }}
+                                />
                                 <Card.Body>
                                     <Card.Title>{recipe.name}</Card.Title>
                                     <Card.Text>{recipe.cuisine}</Card.Text>

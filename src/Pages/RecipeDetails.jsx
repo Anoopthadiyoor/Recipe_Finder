@@ -37,29 +37,35 @@ function RecipeDetails() {
   }
 
   return (
-    <main className="container py-5">
+    <main className="container-fluid py-5" style={{ minHeight: '100vh', backgroundColor: '#f7f9f7' }}>
       <div className="mx-auto recipe-details">
-        <Button as={Link} to="/" variant="outline-success" className="mb-3">
-          Back to recipes
+        <Button
+          as={Link}
+          to="/"
+          variant="link"
+          className="mb-3 px-0 text-secondary text-decoration-none"
+        >
+          &larr; Back to recipes
         </Button>
-        <Card>
-          <Card.Img
-            variant="top"
-            src={recipe.image}
-            alt={recipe.name}
-            className="recipe-details-image"
-          />
-          <Card.Body>
-            <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+        <Card className="border-0 rounded-4 overflow-hidden" style={{ boxShadow: '0 0.5rem 1.5rem rgba(25, 70, 45, 0.08)' }}>
+          <Card.Body className="p-4 p-md-5">
+            <div className="d-flex flex-wrap justify-content-between align-items-start gap-3">
               <div>
-                <h2>{recipe.name}</h2>
+                <h2 className="mb-2">{recipe.name}</h2>
                 <p className="text-muted mb-0">{recipe.cuisine}</p>
               </div>
               <Button as={Link} to={`/edit/${recipe.id}`} variant="outline-success">
                 Edit recipe
               </Button>
             </div>
-
+          </Card.Body>
+          <Card.Img
+            variant="top"
+            src={recipe.image}
+            alt={recipe.name}
+            className="recipe-details-image"
+          />
+          <Card.Body className="p-4 p-md-5">
             <div className="recipe-meta mb-4" aria-label="Recipe information">
               <span><strong>Prep:</strong> {recipe.prepTimeMinutes ?? '—'} min</span>
               <span><strong>Cook:</strong> {recipe.cookTimeMinutes ?? '—'} min</span>
@@ -68,7 +74,7 @@ function RecipeDetails() {
             </div>
 
             <section className="mb-4">
-              <h3>Ingredients</h3>
+              <h3 className="text-success border-bottom pb-2 mb-3">Ingredients</h3>
               {recipe.ingredients?.length ? (
                 <ul>
                   {recipe.ingredients.map((ingredient, index) => (
@@ -79,7 +85,7 @@ function RecipeDetails() {
             </section>
 
             <section>
-              <h3>Instructions</h3>
+              <h3 className="text-success border-bottom pb-2 mb-3">Instructions</h3>
               {recipe.instructions?.length ? (
                 <ol>
                   {recipe.instructions.map((instruction, index) => (

@@ -78,13 +78,26 @@ function RecipeForm({ recipe }) {
   }
 
   return (
-    <main className="container py-5">
-      <div className="mx-auto recipe-form">
-        <h2 className="mb-4">{recipe ? 'Edit recipe' : 'Add a recipe'}</h2>
+    <main className="container-fluid py-5" style={{ minHeight: '100vh', backgroundColor: '#f7f9f7' }}>
+      <div className="mx-auto recipe-form" style={{ maxWidth: '760px' }}>
+        <div className="mb-4">
+          <p className="text-success text-uppercase fw-semibold small mb-2">
+            {recipe ? 'Your collection' : 'Share something delicious'}
+          </p>
+          <h2 className="mb-2">{recipe ? 'Edit recipe' : 'Add a recipe'}</h2>
+          <p className="text-muted mb-0">
+            {recipe ? 'Update the details and keep your recipe up to date.' : 'Fill in the details to add a new favorite to your recipe book.'}
+          </p>
+        </div>
+        <div
+          className="bg-white rounded-4 p-4 p-md-5"
+          style={{ boxShadow: '0 0.5rem 1.5rem rgba(25, 70, 45, 0.08)' }}
+        >
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="recipeName">
-            <Form.Label>Recipe name</Form.Label>
+            <Form.Label className="fw-semibold">Recipe name</Form.Label>
             <Form.Control
+              className="rounded-3 py-2"
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -93,8 +106,9 @@ function RecipeForm({ recipe }) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="recipeImage">
-            <Form.Label>Image URL</Form.Label>
+            <Form.Label className="fw-semibold">Image URL</Form.Label>
             <Form.Control
+              className="rounded-3 py-2"
               name="image"
               type="url"
               value={formData.image}
@@ -104,8 +118,9 @@ function RecipeForm({ recipe }) {
             />
           </Form.Group>
           <Form.Group className="mb-4" controlId="recipeCuisine">
-            <Form.Label>Cuisine</Form.Label>
+            <Form.Label className="fw-semibold">Cuisine</Form.Label>
             <Form.Control
+              className="rounded-3 py-2"
               name="cuisine"
               value={formData.cuisine}
               onChange={handleChange}
@@ -114,8 +129,9 @@ function RecipeForm({ recipe }) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="recipeIngredients">
-            <Form.Label>Ingredients</Form.Label>
+            <Form.Label className="fw-semibold">Ingredients</Form.Label>
             <Form.Control
+              className="rounded-3"
               as="textarea"
               rows={5}
               name="ingredients"
@@ -127,8 +143,9 @@ function RecipeForm({ recipe }) {
             <Form.Text className="text-muted">Enter one ingredient per line.</Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="recipeInstructions">
-            <Form.Label>Instructions</Form.Label>
+            <Form.Label className="fw-semibold">Instructions</Form.Label>
             <Form.Control
+              className="rounded-3"
               as="textarea"
               rows={6}
               name="instructions"
@@ -139,10 +156,11 @@ function RecipeForm({ recipe }) {
             />
             <Form.Text className="text-muted">Enter one cooking step per line.</Form.Text>
           </Form.Group>
-          <div className="row">
-            <Form.Group className="col-sm-4 mb-3" controlId="recipePrepTime">
-              <Form.Label>Prep time (minutes)</Form.Label>
+          <div className="row g-3 mb-3 p-3 p-md-4 bg-light rounded-3">
+            <Form.Group className="col-sm-4" controlId="recipePrepTime">
+              <Form.Label className="fw-semibold">Prep time (minutes)</Form.Label>
               <Form.Control
+                className="rounded-3"
                 type="number"
                 min="0"
                 name="prepTimeMinutes"
@@ -151,9 +169,10 @@ function RecipeForm({ recipe }) {
                 required
               />
             </Form.Group>
-            <Form.Group className="col-sm-4 mb-3" controlId="recipeCookTime">
-              <Form.Label>Cook time (minutes)</Form.Label>
+            <Form.Group className="col-sm-4" controlId="recipeCookTime">
+              <Form.Label className="fw-semibold">Cook time (minutes)</Form.Label>
               <Form.Control
+                className="rounded-3"
                 type="number"
                 min="0"
                 name="cookTimeMinutes"
@@ -162,9 +181,10 @@ function RecipeForm({ recipe }) {
                 required
               />
             </Form.Group>
-            <Form.Group className="col-sm-4 mb-3" controlId="recipeServings">
-              <Form.Label>Servings</Form.Label>
+            <Form.Group className="col-sm-4" controlId="recipeServings">
+              <Form.Label className="fw-semibold">Servings</Form.Label>
               <Form.Control
+                className="rounded-3"
                 type="number"
                 min="1"
                 name="servings"
@@ -175,8 +195,9 @@ function RecipeForm({ recipe }) {
             </Form.Group>
           </div>
           <Form.Group className="mb-4" controlId="recipeDifficulty">
-            <Form.Label>Difficulty</Form.Label>
+            <Form.Label className="fw-semibold">Difficulty</Form.Label>
             <Form.Select
+              className="rounded-3 py-2"
               name="difficulty"
               value={formData.difficulty}
               onChange={handleChange}
@@ -195,6 +216,7 @@ function RecipeForm({ recipe }) {
             <Button as={Link} to="/" variant="outline-secondary">Cancel</Button>
           </div>
         </Form>
+        </div>
       </div>
     </main>
   )
